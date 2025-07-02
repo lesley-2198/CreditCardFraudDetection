@@ -1,0 +1,25 @@
+# R and RStudio-specific
+.Rproj.user/
+*.Rproj
+.Rhistory
+.RData
+.Ruserdata
+
+# Data folders
+data/raw/
+data/processed/
+
+# Power BI files
+*.pbix
+
+# Output artifacts
+outputs/models/
+outputs/reports/
+outputs/plots/
+
+# Misc
+.DS_Store
+Thumbs.db
+*.log
+*.tmp
+*.zip
