@@ -4,6 +4,7 @@
 .Rhistory
 .RData
 .Ruserdata
+.RDataTmp
 
 # Data folders
 data/raw/
