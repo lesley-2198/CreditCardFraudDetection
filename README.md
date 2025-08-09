@@ -37,6 +37,7 @@ Credit card fraud is a growing threat in the digital economy. The challenge lies
 | BI Dashboard    | Power BI           |
 | Visualization   | ggplot2, Power BI |
 | Reporting       | RMarkdown, CSV summaries |
+| Documentation   | MS Word  |
 
 ---
 
@@ -61,16 +62,59 @@ Credit card fraud is a growing threat in the digital economy. The challenge lies
 ## 📁 Project Structure
 
 ```
-📦 fraud-detection-r-powerbi/
-├── data/                 # Raw and processed data
-├── scripts/              # R scripts for EDA, modeling, and export
+📦 credit-card-fraud-detection/
+├── data/
+│   ├── raw/
+│   │   └── creditcard.csv
+│   └── processed/
+│       ├── creditcard_clean.csv
+│       ├── creditcard_model_ready.csv
+│       ├── fraud_summary_for_powerbi.csv
+│       ├── logistic_predictions.csv
+│       ├── train_data.csv
+│       └── test_data.csv
+├── outputs/
+│   ├── models/
+│   │   └── logistic_model.rds
+│   ├── plots/
+│   └── reports/
+│       └── logistic_confusion_matrix.txt
+├── scripts/
+│   ├── 00_master_script.R
 │   ├── 01_data_load.R
-│   ├── 02_eda.R
+│   ├── 02a_eda.R
 │   ├── 02b_eda_features.R
-│   └── 03_modeling.R
-├── outputs/              # Plots, metrics, exported CSVs
-├── dashboard/            # Power BI .pbix file and screenshots
-└── README.md
+│   ├── 03a_feature_selection_scaling.R
+│   ├── 03b_preprocessing.R
+│   ├── 04_model_data_walkthrough.R
+│   ├── 05a_modeling_data_split.R
+│   └── 05b_model_baseline.R
+```
+
+---
+
+## 🚀 Usage
+
+To run the entire project workflow from data loading to model training and output generation, execute the **master orchestrator script**:
+
+```r
+# From the project root directory
+source("scripts/00_master_script.R")
+```
+
+### 📝 Notes
+
+> - Ensure all required packages are installed. The master script will automatically install any missing ones.
+> - By default, the script expects the Kaggle dataset (`creditcard.csv`) to be located in:
+
+```bash
+data/raw/
+```
+>- All processed datasets, trained models, evaluation reports, and plots will be saved into their respective folders under:
+
+```bash
+data/processed/
+outputs/
 ```
 
 ---
@@ -96,4 +140,4 @@ Credit card fraud is a growing threat in the digital economy. The challenge lies
 
 **Lesley Ngcobo**  
 Data Analyst | R Enthusiast | Business Intelligence Learner  
-📧 [s225171406@mandela.ac.za] | 🌐 [https://www.linkedin.com/in/lesley-ngcobo-449b88240/]
+📧 [Email | Lesley Ngcobo](s225171406@mandela.ac.za) | 🌐 [LinkedIn | Lesley Ngcobo](https://www.linkedin.com/in/lesley-ngcobo-449b88240/)
