@@ -1,8 +1,4 @@
 # 02_eda.R - General EDA
-
-# Load packages
-library(tidyverse)
-
 # Set plot style
 theme_set(theme_minimal())
 

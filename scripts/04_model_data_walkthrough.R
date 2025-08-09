@@ -1,11 +1,4 @@
 # 04a_model_data_walkthrough.R
-
-# Load required libraries
-library(tidyverse)
-library(janitor)
-library(skimr)
-library(corrplot)
-
 # Load the model-ready data
 data_model_ready <- read_csv("data/processed/creditcard_model_ready.csv")
 

@@ -1,9 +1,5 @@
 # 03_feature_selection_scaling.R
 # Purpose: Perform feature selection and feature scaling
-
-library(tidyverse)
-library(readr)
-
 # Load preprocessed data
 data_clean <- read_csv("data/processed/creditcard_clean.csv")
 

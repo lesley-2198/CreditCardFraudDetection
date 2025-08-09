@@ -1,9 +1,4 @@
 # 02b_eda_features.R - PCA Feature Exploration
-
-# Load packages
-library(tidyverse)
-library(corrplot)
-
 # Plot style
 theme_set(theme_minimal())
 

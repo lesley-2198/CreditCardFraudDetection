@@ -1,13 +1,5 @@
 # 05_model_baseline.R
 # Step 5: Baseline Modeling with Logistic Regression
-
-# 📦 Load Libraries
-library(tidyverse)
-library(caret)
-library(yardstick)
-library(tibble)
-library(readr)
-
 # 📁 Load Data
 train_data <- read_csv("data/processed/train_data.csv")
 test_data  <- read_csv("data/processed/test_data.csv")

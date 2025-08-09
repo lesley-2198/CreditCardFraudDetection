@@ -1,11 +1,6 @@
 # ─────────────────────────────────────────────────────────
 # Purpose: Split the model-ready data into training and test sets
 # ─────────────────────────────────────────────────────────
-
-# Load necessary package
-library(caret)     # For stratified data partitioning
-library(readr)     # For saving the datasets
-
 # Load the model-ready data
 data_model_ready <- read_csv("data/processed/creditcard_model_ready.csv")
 

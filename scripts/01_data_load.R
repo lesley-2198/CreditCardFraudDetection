@@ -1,9 +1,4 @@
 # 01_data_load.R
-
-# Load libraries
-library(tidyverse)
-library(data.table)
-
 # Load dataset
 data_raw <- fread("data/raw/creditcard.csv")
 

@@ -1,9 +1,5 @@
 # 03_preprocessing.R
 # Prepares the Credit Card Fraud dataset for modeling
-
-library(tidyverse)
-library(scales)
-
 # Load the raw data
 source("scripts/01_data_load.R")
 
