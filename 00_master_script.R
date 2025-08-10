@@ -10,7 +10,7 @@ rm(list = ls())
 
 # Load required libraries
 required_packages <- c(
-  "tibble", "skimr", "janitor", "scales", "readr", "tidyverse", "caret", "yardstick", "data.table", "GGally", "corrplot"
+  "smotefamily", "tibble", "skimr", "janitor", "scales", "readr", "tidyverse", "caret", "yardstick", "data.table", "GGally", "corrplot"
 )
 
 # Install missing packages
@@ -44,7 +44,7 @@ source("scripts/03a_feature_selection_scaling.R")
 cat("\n[Step 3b] Running Pre-processing...\n")
 source("scripts/03b_preprocessing.R")
 
-# ---- 4a. Model Data Walkthrough ----
+# ---- 4. Model Data Walkthrough ----
 cat("\n[Step 4] Model Data Walkthrough...\n")
 source("scripts/04_model_data_walkthrough.R")
 
@@ -55,5 +55,9 @@ source("scripts/05a_modeling_data_split.R")
 # ---- 5b. Baseline Model ----
 cat("\n[Step 5b] Training Baseline Model...\n")
 source("scripts/05b_model_baseline.R")
+
+# --- 5c. Model Improvement with SMOTE ----
+cat("\n[Step 5C] Improved Baseline Model with SMOTE...\n")
+source("scripts/05c_model_improvement_smote.R")
 
 cat("\n✅ All steps completed successfully!\n")
