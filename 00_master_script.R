@@ -10,7 +10,7 @@ rm(list = ls())
 
 # Load required libraries
 required_packages <- c(
-  "smotefamily", "tibble", "skimr", "janitor", "scales", "readr", "tidyverse", "caret", "yardstick", "data.table", "GGally", "corrplot"
+  "PRROC", "pROC", "smotefamily", "tibble", "skimr", "janitor", "scales", "readr", "tidyverse", "caret", "yardstick", "data.table", "GGally", "corrplot"
 )
 
 # Install missing packages

@@ -66,3 +66,26 @@ print("Confusion Matrix (SMOTE):")
 print(conf_matrix)
 print("Metrics (SMOTE):")
 print(metrics)
+
+# ROC Curve
+roc_obj <- roc(test_data$Class, pred_probs, levels = c("0", "1"), direction = "<")
+auc_val <- auc(roc_obj)
+
+png("outputs/plots/roc_curve.png", width = 800, height = 600)
+plot(roc_obj, col = "#2E86C1", lwd = 3, main = paste("ROC Curve (AUC =", round(auc_val, 3), ")"))
+abline(a = 0, b = 1, lty = 2, col = "gray")
+dev.off()
+
+# Precision-Recall Curve
+pr_obj <- pr.curve(scores.class0 = pred_probs[test_data$Class == "1"],
+                   scores.class1 = pred_probs[test_data$Class == "0"],
+                   curve = TRUE)
+
+png("outputs/plots/pr_curve.png", width = 800, height = 600)
+plot(pr_obj, main = paste("Precision-Recall Curve (AUC =", round(pr_obj$auc.integral, 3), ")"),
+     col = "#E67E22", lwd = 3)
+dev.off()
+
+# 🖨️ Print AUC values to console
+cat("ROC AUC:", round(auc_val, 3), "\n")
+cat("PR AUC:", round(pr_obj$auc.integral, 3), "\n")
