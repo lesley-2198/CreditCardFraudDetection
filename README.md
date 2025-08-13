@@ -1,6 +1,6 @@
 # 💳 Credit Card Fraud Detection Using R & Power BI
 
-An end-to-end machine learning project to detect fraudulent credit card transactions using an imbalanced dataset. This project demonstrates how predictive modeling in R and interactive dashboards in Power BI can work together to support financial risk management in real-world settings.
+An end-to-end machine learning project to detect fraudulent credit card transactions using an imbalanced dataset. This project demonstrates how predictive modeling in R (including logistic regression, SMOTE, and XGBoost) and interactive dashboards in Power BI can work together to support financial risk management in real-world settings.
 
 ---
 
@@ -50,8 +50,8 @@ Credit card fraud is a growing threat in the digital economy. The challenge lies
 
 ### 2. Preprocessing & Modeling
 - Standardized `Amount`, handled imbalance using SMOTE and undersampling
-- Built classification models with cross-validation
-- Evaluated using precision, recall, F1-score, ROC, PR curves
+- Built baseline and advanced classification models (Logistic Regression, Random Forest, XGBoost)
+- Evaluated models using precision, recall, F1-score, ROC, and Precision-Recall curves
 
 ### 3. Business Intelligence Dashboard (Power BI)
 - Created KPIs and charts summarizing fraud distribution, transaction value trends, and model predictions
@@ -71,14 +71,21 @@ Credit card fraud is a growing threat in the digital economy. The challenge lies
 │       ├── creditcard_model_ready.csv
 │       ├── fraud_summary_for_powerbi.csv
 │       ├── logistic_predictions.csv
+│       ├── smote_data.RData
 │       ├── train_data.csv
 │       └── test_data.csv
 ├── outputs/
 │   ├── models/
-│   │   └── logistic_model.rds
+│   │   ├── logistic_model.rds
+│   │   └── xgboost_model.rds
 │   ├── plots/
+│   │   ├── logistic_roc_curve.png
+│   │   ├── xgboost_roc_curve.png
+│   │   ├── xgboost_pr_curve.png
+│   │   └── xgboost_feature_importance.png
 │   └── reports/
-│       └── logistic_confusion_matrix.txt
+│       ├── logistic_confusion_matrix.txt
+│       └── xgboost_report.txt
 ├── scripts/
 │   ├── 00_master_script.R
 │   ├── 01_data_load.R
@@ -88,7 +95,9 @@ Credit card fraud is a growing threat in the digital economy. The challenge lies
 │   ├── 03b_preprocessing.R
 │   ├── 04_model_data_walkthrough.R
 │   ├── 05a_modeling_data_split.R
-│   └── 05b_model_baseline.R
+│   ├── 05b_model_baseline.R
+│   ├── 05c_model_improvement_smote.R
+│   └── 05d_model_improvement_xgboost.R
 ```
 
 ---
@@ -136,8 +145,18 @@ outputs/
 
 ---
 
-## 👨‍💻 Author
+## 👨‍💻 The Architect
 
-**Lesley Ngcobo**  
-Data Analyst | R Enthusiast | Business Intelligence Learner  
-📧 [Email | Lesley Ngcobo](s225171406@mandela.ac.za) | 🌐 [LinkedIn | Lesley Ngcobo](https://www.linkedin.com/in/lesley-ngcobo-449b88240/)
+<div align="center">
+
+### **Lesley Ngcobo**
+*Data Scientist | ML Engineer | Business Intelligence Specialist*
+
+![Profile](https://img.shields.io/badge/Profile-Data_Scientist-00B4D8?style=for-the-badge)
+![Location](https://img.shields.io/badge/Location-South_Africa-FF6B6B?style=for-the-badge)
+
+**🔗 Connect with me:**
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=flat&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/lesley-ngcobo-449b88240/)
+[![Email](https://img.shields.io/badge/Email-D14836?style=flat&logo=gmail&logoColor=white)](mailto:s225171406@mandela.ac.za)
+
+</div>
