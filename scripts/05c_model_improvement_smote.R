@@ -34,6 +34,9 @@ model_formula <- Class ~ .
 set.seed(123)
 log_model_smote <- glm(model_formula, data = train_data_smote, family = "binomial")
 
+# After SMOTE step
+save(train_data_smote, test_data, file = "smote_data.RData")
+
 # 🔮 Predictions
 pred_probs <- predict(log_model_smote, newdata = test_data, type = "response")
 pred_class <- ifelse(pred_probs > 0.5, 1, 0) %>% factor(levels = c(0, 1))
