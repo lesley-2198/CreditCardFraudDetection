@@ -46,7 +46,8 @@ scripts <- c(
   "05a_modeling_data_split.R",
   "05b_model_baseline.R",
   "05c_model_improvement_smote.R",
-  "05d_model_improvement_xgboost.R"  # Added XGBoost
+  "05d_model_improvement_xgboost.R",
+  "06_model_comparison.R"
 )
 
 for (script in scripts) {
