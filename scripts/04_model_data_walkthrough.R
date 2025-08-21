@@ -1,6 +1,6 @@
 # 04a_model_data_walkthrough.R
 # Load the model-ready data
-data_model_ready <- read_csv("data/processed/creditcard_model_ready.csv")
+data_model_ready <- read_csv(here("data", "processed", "creditcard_model_ready.csv"))
 
 # 1. Basic Overview
 cat("🔍 Dataset Dimensions:\n")
@@ -37,4 +37,6 @@ corr_matrix <- data_model_ready %>%
   select(where(is.numeric), -Class) %>%
   cor()
 
+png(here("outputs", "plots", "feature_correlation.png"), width = 800, height = 800)
 corrplot(corr_matrix, method = "color", tl.cex = 0.7, number.cex = 0.7, type = "upper", title = "Feature Correlation", mar = c(0,0,1,0))
+dev.off()

@@ -2,7 +2,7 @@
 # Purpose: Split the model-ready data into training and test sets
 # ─────────────────────────────────────────────────────────
 # Load the model-ready data
-data_model_ready <- read_csv("data/processed/creditcard_model_ready.csv")
+data_model_ready <- read_csv(here("data", "processed", "creditcard_model_ready.csv"))
 
 # Set a seed to ensure reproducibility
 set.seed(123)
@@ -27,5 +27,5 @@ cat("\nFraud Rate in Test Set:\n")
 print(prop.table(table(test_data$Class)))
 
 # Save the split data
-write_csv(train_data, "data/processed/train_data.csv")
-write_csv(test_data, "data/processed/test_data.csv")
+write_csv(train_data, here("data", "processed", "train_data.csv"))
+write_csv(test_data, here("data", "processed", "test_data.csv"))

@@ -26,12 +26,11 @@ data_clean <- data_clean %>%
   )
 
 #Flatten matrix/list columns into numeric columns
-data_clean[[30]] <- as.vector(data_clean[[30]])
-data_clean[[31]] <- as.vector(data_clean[[31]])
-data_clean[[32]] <- as.vector(data_clean[[32]])
+data_clean <- data_clean %>%
+  mutate(across(where(is.matrix), as.vector))
 
 # 5. Save the cleaned dataset
-write_csv(data_clean, "data/processed/creditcard_clean.csv")
+write_csv(data_clean, here("data", "processed", "creditcard_clean.csv"))
 
 # 6. Basic checks
 glimpse(data_clean)

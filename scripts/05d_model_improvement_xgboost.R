@@ -2,7 +2,7 @@
 # Train & evaluate XGBoost model on SMOTE-balanced dataset
 
 # Load the SMOTE-balanced training and test data
-load(here("smote_data.RData"))  # loads train_data_smote and test_data
+load(here("data", "processed", "smote_data.RData"))  # loads train_data_smote and test_data
 
 # Ensure the target variable is in numeric 0/1 format
 train_data_smote$Class <- as.numeric(as.character(train_data_smote$Class))
@@ -28,6 +28,7 @@ params <- list(
   colsample_bytree = 0.8
 )
 
+set.seed(123)
 xgb_model <- xgb.train(
   params = params,
   data = dtrain,
@@ -50,7 +51,9 @@ print(cm)
 
 # ROC Curve
 roc_obj <- roc(y_test, pred_probs)
+png(here("outputs", "plots", "xgboost_roc_curve.png"), width = 800, height = 600)
 plot(roc_obj, main = "XGBoost ROC Curve", col = "blue", lwd = 2)
+dev.off()
 
 # Precision-Recall Curve
 pr_obj <- pr.curve(
@@ -58,11 +61,15 @@ pr_obj <- pr.curve(
   scores.class1 = pred_probs[y_test == 0],
   curve = TRUE
 )
+png(here("outputs", "plots", "xgboost_pr_curve.png"), width = 800, height = 600)
 plot(pr_obj, main = "XGBoost Precision-Recall Curve")
+dev.off()
 
 # Feature importance
 importance_matrix <- xgb.importance(model = xgb_model)
+png(here("outputs", "plots", "xgboost_feature_importance.png"), width = 800, height = 600)
 xgb.plot.importance(importance_matrix)
+dev.off()
 
 # Save model
 saveRDS(xgb_model, here("outputs", "models", "xgboost_model.rds"))
@@ -73,18 +80,3 @@ cat("Confusion Matrix:\n")
 print(cm)
 cat("\nAUC:", auc(roc_obj), "\n")
 sink()
-
-# Save ROC curve
-png(here("outputs", "plots", "xgboost_roc_curve.png"))
-plot(roc_obj, main = "XGBoost ROC Curve", col = "blue", lwd = 2)
-dev.off()
-
-# Save Precision-Recall curve
-png(here("outputs", "plots", "xgboost_pr_curve.png"))
-plot(pr_obj, main = "XGBoost Precision-Recall Curve")
-dev.off()
-
-# Save Feature Importance plot
-png(here("outputs", "plots", "xgboost_feature_importance.png"))
-xgb.plot.importance(importance_matrix)
-dev.off()

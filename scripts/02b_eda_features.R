@@ -10,7 +10,7 @@ p4 <- ggplot(data_raw, aes(x = factor(Class), y = Amount)) +
   scale_y_log10() +
   labs(title = "Transaction Amount by Class", x = "Class (0 = Legit, 1 = Fraud)", y = "Amount (€)")
 
-ggsave("outputs/plots/amount_boxplot_by_class.png", plot = p4, width = 8, height = 6, dpi = 300)
+ggsave(here("outputs", "plots", "amount_boxplot_by_class.png"), plot = p4, width = 8, height = 6, dpi = 300)
 
 # 2. Density Plots for PCA Features
 features <- paste0("V", 1:6)
@@ -22,7 +22,7 @@ for (feature in features) {
     scale_color_manual(values = c("0" = "grey40", "1" = "tomato")) +
     theme(legend.position = "top")
   
-  ggsave(paste0("outputs/plots/density_", feature, ".png"),
+  ggsave(here("outputs", "plots", paste0("density_", feature, ".png")),
          plot = p, width = 10, height = 4, dpi = 300)
 }
 
@@ -31,7 +31,7 @@ corr_data <- data_raw %>% select(-Class)
 corr_matrix <- cor(corr_data)
 
 # Export corrplot using base plotting device
-png("outputs/plots/correlation_matrix.png", width = 1000, height = 1000)
+png(here("outputs", "plots", "correlation_matrix.png"), width = 1000, height = 1000)
 corrplot(corr_matrix, method = "color", type = "upper", tl.cex = 0.6,
          title = "Feature Correlation Matrix (PCA + Amount + Time)",
          mar = c(0,0,2,0))  # adjust top margin for title

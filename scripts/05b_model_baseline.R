@@ -1,8 +1,8 @@
 # 05_model_baseline.R
 # Step 5: Baseline Modeling with Logistic Regression
 # 📁 Load Data
-train_data <- read_csv("data/processed/train_data.csv")
-test_data  <- read_csv("data/processed/test_data.csv")
+train_data <- read_csv(here("data", "processed", "train_data.csv"))
+test_data  <- read_csv(here("data", "processed", "test_data.csv"))
 
 # 🧹 Convert Class to factor for classification
 train_data <- train_data %>% mutate(Class = factor(Class, levels = c(0, 1)))
@@ -31,7 +31,7 @@ output_df <- test_data %>%
   select(Class) %>%
   mutate(predicted = pred_class, probability = pred_probs)
 
-write_csv(output_df, "data/processed/logistic_predictions.csv")
+write_csv(output_df, here("data", "processed", "logistic_predictions.csv"))
 
 # 🖨️ Print Results
 print("Confusion Matrix:")
@@ -39,10 +39,10 @@ print(conf_matrix)
 print("Metrics:")
 print(metrics)
  
-saveRDS(log_model, "outputs/models/logistic_model.rds")
-sink("outputs/reports/logistic_confusion_matrix.txt")
+saveRDS(log_model, here("outputs", "models", "logistic_model.rds"))
+sink(here("outputs", "reports", "logistic_confusion_matrix.txt"))
 print(conf_matrix)
 sink()
 
 # Save yardstick metrics
-write.csv(metrics, "data/processed/logistic_metrics.csv", row.names = FALSE)
+write.csv(metrics, here("data", "processed", "logistic_metrics.csv"), row.names = FALSE)

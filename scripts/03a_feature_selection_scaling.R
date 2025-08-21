@@ -1,7 +1,7 @@
 # 03_feature_selection_scaling.R
 # Purpose: Perform feature selection and feature scaling
 # Load preprocessed data
-data_clean <- read_csv("data/processed/creditcard_clean.csv")
+data_clean <- read_csv(here("data", "processed", "creditcard_clean.csv"))
 
 #-------------------------------#
 # Step 1: Feature Selection
@@ -36,6 +36,6 @@ data_model_ready <- data_model_ready %>%
 # Step 3: Save Output
 #-------------------------------#
 
-write_csv(data_model_ready, "data/processed/creditcard_model_ready.csv")
+write_csv(data_model_ready, here("data", "processed", "creditcard_model_ready.csv"))
 
 message("Feature selection and scaling complete. Saved to 'data/processed/creditcard_model_ready.csv'")
