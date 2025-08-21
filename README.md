@@ -11,6 +11,7 @@ Credit card fraud is a growing threat in the digital economy. The challenge lies
 - Classify transactions as fraudulent or legitimate
 - Deal with class imbalance (only ~0.17% are fraud)
 - Uncover patterns and high-risk signals in transactional behavior
+- Compare multiple modeling approaches for optimal performance
 - Communicate findings through an executive-friendly Power BI dashboard
 
 ---
@@ -34,8 +35,9 @@ Credit card fraud is a growing threat in the digital economy. The challenge lies
 |----------------|--------------------|
 | Language        | R (tidyverse, caret, corrplot, etc.) |
 | Modeling        | Logistic Regression, Random Forests, SMOTE |
+| Evaluation      | pROC, PRROC, yardstick, confusionMatrix |
 | BI Dashboard    | Power BI           |
-| Visualization   | ggplot2, Power BI |
+| Visualization   | ggplot2, corrplot, Power BI |
 | Reporting       | RMarkdown, CSV summaries |
 | Documentation   | MS Word  |
 
@@ -43,18 +45,22 @@ Credit card fraud is a growing threat in the digital economy. The challenge lies
 
 ## 📊 Key Steps
 
-### 1. Data Exploration
+### 1. Data Exploration & Preprocessing
 - Visualized amount distributions and transaction times
 - Compared fraudulent vs. legitimate transaction characteristics
-- Inspected PCA features and correlation structure
+- Standardized numerical features (`Amount`, `Time`)
+- Created additional features (e.g., time-based indicators)
+- Handled extreme class imbalance using SMOTE oversampling
 
-### 2. Preprocessing & Modeling
-- Standardized `Amount`, handled imbalance using SMOTE and undersampling
-- Built baseline and advanced classification models (Logistic Regression, Random Forest, XGBoost)
-- Evaluated models using precision, recall, F1-score, ROC, and Precision-Recall curves
+### 2. Modeling Approaches
+- **Baseline Logistic Regression:** Established performance baseline
+- **SMOTE-enhanced Logistic Regression:** Addressed class imbalance
+- **XGBoost:** Advanced gradient boosting for improved performance
+- Comprehensive model evaluation using precision, recall, F1-score, ROC, and Precision-Recall curves
 
 ### 3. Business Intelligence Dashboard (Power BI)
-- Created KPIs and charts summarizing fraud distribution, transaction value trends, and model predictions
+- Created interactive KPIs and charts summarizing fraud distribution
+- Visualized transaction value trends and model predictions
 - Designed an intuitive interface for fraud analysts and stakeholders
 
 ---
@@ -71,33 +77,52 @@ Credit card fraud is a growing threat in the digital economy. The challenge lies
 │       ├── creditcard_model_ready.csv
 │       ├── fraud_summary_for_powerbi.csv
 │       ├── logistic_predictions.csv
+│       ├── logistic_smote_predictions.csv
+│       ├── logistic_metrics.csv
+│       ├── logistic_smote_metrics.csv
 │       ├── smote_data.RData
 │       ├── train_data.csv
 │       └── test_data.csv
 ├── outputs/
 │   ├── models/
 │   │   ├── logistic_model.rds
+│   │   ├── logistic_model_smote.rds
 │   │   └── xgboost_model.rds
 │   ├── plots/
-│   │   ├── logistic_roc_curve.png
+│   │   ├── amount_distribution.png
+│   │   ├── log_amount_distribution.png
+│   │   ├── time_distribution_by_class.png
+│   │   ├── amount_boxplot_by_class.png
+│   │   ├── density_V1.png ... density_V6.png
+│   │   ├── correlation_matrix.png
+│   │   ├── feature_correlation.png
+│   │   ├── roc_curve.png
+│   │   ├── pr_curve.png
 │   │   ├── xgboost_roc_curve.png
 │   │   ├── xgboost_pr_curve.png
-│   │   └── xgboost_feature_importance.png
+│   │   ├── xgboost_feature_importance.png
+│   │   └── model_comparison.png
 │   └── reports/
 │       ├── logistic_confusion_matrix.txt
-│       └── xgboost_report.txt
+│       ├── logistic_smote_confusion_matrix.txt
+│       ├── xgboost_report.txt
+│       ├── model_comparison.csv
+│       └── model_comparison_detailed.csv
 ├── scripts/
 │   ├── 00_master_script.R
 │   ├── 01_data_load.R
 │   ├── 02a_eda.R
 │   ├── 02b_eda_features.R
-│   ├── 03a_feature_selection_scaling.R
 │   ├── 03b_preprocessing.R
+│   ├── 03a_feature_selection_scaling.R
 │   ├── 04_model_data_walkthrough.R
 │   ├── 05a_modeling_data_split.R
 │   ├── 05b_model_baseline.R
 │   ├── 05c_model_improvement_smote.R
-│   └── 05d_model_improvement_xgboost.R
+│   ├── 05d_model_improvement_xgboost.R
+│   └── 06_model_comparison.R
+└── logs/
+    └── master_script_log.txt
 ```
 
 ---
@@ -113,35 +138,39 @@ source("scripts/00_master_script.R")
 
 ### 📝 Notes
 
-> - Ensure all required packages are installed. The master script will automatically install any missing ones.
-> - By default, the script expects the Kaggle dataset (`creditcard.csv`) to be located in:
-
-```bash
-data/raw/
-```
->- All processed datasets, trained models, evaluation reports, and plots will be saved into their respective folders under:
-
-```bash
-data/processed/
-outputs/
-```
+> - The master script automatically installs required packages and handles all dependencies
+> - All file paths are managed using the `here` package for reproducibility across systems
+> - Execution progress and timing information is logged to `outputs/logs/master_script_log.txt`
+> - The Kaggle dataset (`creditcard.csv`) must be placed in `data/raw/` before execution
 
 ---
 
 ## 📈 Results & Findings
 
+| **Model**                           | **AUC** | **Precision** | **Recall** | **F1** | **Accuracy** |
+|-------------------------------------|---------|---------------|------------|--------|--------------|
+| **Logistic Regression (Baseline)**  | -       | 0.873         | 0.579      | 0.696  |  0.999       |
+| **Logistic Regression (SMOTE)**     | 0.977   | 0.794         | 0.794      | 0.794  | 0.999        |
+| **XGBoost**                         | 0.982   | 0.944         |0.794       | 0.863  | 0.999        |
+
+### Key Insights
+
+- XGBoost achieved the best overall performance with highest AUC (0.982) and F1-score (0.863)
+- SMOTE significantly improved recall (from 0.579 to 0.794) while maintaining high precision
 - Fraudulent transactions often have smaller or atypical amounts
 - Certain PCA features show strong separation by class
 - Precision-recall trade-off is critical in low-fraud environments
-- The Power BI dashboard enables real-time fraud monitoring
+- The Power BI dashboard enables real-time fraud monitoring and investigation
 
 ---
 
 ## 📌 Next Steps
-
-- Deploy as a real-time scoring pipeline
-- Test advanced models like XGBoost or Isolation Forest
-- Add geolocation or merchant metadata (if available)
+- Deploy the best model (XGBoost) as a real-time scoring API
+- Implement automated model retraining pipeline
+- Integrate additional data sources (geolocation, merchant metadata)
+- Develop an alert system for high-risk transactions
+- Explore deep learning approaches (autoencoders, LSTM networks)
+- Implement model monitoring for concept drift detection
 
 ---
 
