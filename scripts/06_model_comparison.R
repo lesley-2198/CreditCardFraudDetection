@@ -1,10 +1,6 @@
 # 06_model_comparison.R
 # Compare Logistic Regression (baseline), SMOTE, and XGBoost models
 
-library(here)
-library(tidyverse)
-library(stringr)
-
 # ---------------------------
 # 1. Define helper to extract metrics from confusion matrix format
 # ---------------------------
