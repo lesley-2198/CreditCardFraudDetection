@@ -61,7 +61,8 @@ Credit card fraud is a growing threat in the digital economy. The challenge lies
 ### 3. Business Intelligence Dashboard (Power BI)
 - Created interactive KPIs and charts summarizing fraud distribution
 - Visualized transaction value trends and model predictions
-- Designed an intuitive interface for fraud analysts and stakeholders
+- Designed an intuitive interface for fraud analysts and stakeholders  
+> ⚡ Note: The dashboard is a **work in progress** — additional fraud trend visualizations and analyst-focused KPIs are being developed.
 
 ---
 
@@ -93,7 +94,7 @@ Credit card fraud is a growing threat in the digital economy. The challenge lies
 │   │   ├── log_amount_distribution.png
 │   │   ├── time_distribution_by_class.png
 │   │   ├── amount_boxplot_by_class.png
-│   │   ├── density_V1.png ... density_V6.png
+│   │   ├── density_V1.png ...
 │   │   ├── correlation_matrix.png
 │   │   ├── feature_correlation.png
 │   │   ├── roc_curve.png
@@ -141,7 +142,7 @@ source("scripts/00_master_script.R")
 > - The master script automatically installs required packages and handles all dependencies
 > - All file paths are managed using the `here` package for reproducibility across systems
 > - Execution progress and timing information is logged to `outputs/logs/master_script_log.txt`
-> - The Kaggle dataset (`creditcard.csv`) must be placed in `data/raw/` before execution
+> - The Kaggle dataset (`data.csv`) must be placed in `data/raw/` before execution
 
 ---
 
@@ -161,10 +162,12 @@ source("scripts/00_master_script.R")
 - Certain PCA features show strong separation by class
 - Precision-recall trade-off is critical in low-fraud environments
 - The Power BI dashboard enables real-time fraud monitoring and investigation
+> 💡 Power BI dashboard development is **ongoing** — the current version includes fraud distribution summaries, with future updates planned for advanced drilldowns and real-time monitoring views.
 
 ---
 
 ## 📌 Next Steps
+- Finalize and expand the Power BI dashboard (advanced drilldowns, fraud KPIs)
 - Deploy the best model (XGBoost) as a real-time scoring API
 - Implement automated model retraining pipeline
 - Integrate additional data sources (geolocation, merchant metadata)
